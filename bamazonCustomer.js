@@ -53,7 +53,6 @@ function userPurchase() {
       filter: Number
     }
   ]).then(function (answer) {
-    // Retrieve the item requested and its quantity instock?????????????
     // itemReq and stockReq are returning the user inputs
     var itemReq = answer.item_id;
     console.log(itemReq);
@@ -77,7 +76,7 @@ function userPurchase() {
           ],
         function (err) {
             if (err) throw err;
-            // console.log('itemReq: '+ itemReq +'|' + 'item_id: ' +res[0].item_id +'|'+ 'stockReq: '+ stockReq +'|'+ 'stock_quantity: '+ res[0].stock_quantity);
+            console.log('itemReq: '+ itemReq +'|' + 'item_id: ' +res[0].item_id +'|'+ 'stockReq: '+ stockReq +'|'+ 'stock_quantity: '+ res[0].stock_quantity);
             // Get price and total order price.
             console.log('Your order summery. Total: '+res[0].price * stockReq + '|' + 'For ' + stockReq+' '+res[0].price+' '+ res[0].product_name+'.' );
           }
