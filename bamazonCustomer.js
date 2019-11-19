@@ -55,8 +55,13 @@ function userPurchase() {
   ]).then(function (answer) {
     // Retrieve the item requested and its quantity instock
     itemReq = answer.item_id;
-    console.log(itemReq);
+    // console.log(itemReq);
     stockReq = answer.stock_quantity;
-    console.log(stockReq);
-  }
+    // console.log(stockReq);
+
+    // connection.query("SELECT * FROM products WHERE ?", { item_id: itemReq }, function (err, res) {
+    //   if (err) throw err;
+
+    // })
+  })
 }
