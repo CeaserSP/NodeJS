@@ -40,3 +40,4 @@ function userPurchase(){
   }
 ])
 }
+// TO DO:Query DB to make sure the user input is less than the stock quanity
