@@ -14,7 +14,7 @@ connection.connect(function (err) {
   console.log("connected as id " + connection.threadId);
   queryAllProducts();
 });
-
+// Show inventory and call userPurchase()
 function queryAllProducts() {
   connection.query("SELECT * FROM products", function (err, res) {
     if (err) throw err;
@@ -24,33 +24,39 @@ function queryAllProducts() {
     console.log("-----------------------------------");
     userPurchase();
   });
-}
-// Set up user inputs to ask for item_id and stock_quantity
+};
+// prompt user inputs, validate input, check for suffiecient stock, update stock
 function userPurchase() {
+  // Set up user inputs to ask for item_id and stock_quantity
   inquirer.prompt([
     {
-    name: "item_id",
-    type: "input",
-    message: "Enter item_id please.",
-    validate: function (value) {
-      if (isNaN(value) === false) {
-        return true;
-      }
-      return "Please insert integer.";
-    },
-    filter: Number
-  }, {
-    name: "stock_quantity",
-    type: "input",
-    message: "How many would you like?",
-    validate: function (value) {
-      if (isNaN(value) === false) {
-        return true;
-      }
-      return "Please insert integer.";
-    },
-    filter: Number
+      name: "item_id",
+      type: "input",
+      message: "Enter item_id please.",
+      validate: function (value) {
+        if (isNaN(value) === false) {
+          return true;
+        }
+        return "Please insert integer.";
+      },
+      filter: Number
+    }, {
+      name: "stock_quantity",
+      type: "input",
+      message: "How many would you like?",
+      validate: function (value) {
+        if (isNaN(value) === false) {
+          return true;
+        }
+        return "Please insert integer.";
+      },
+      filter: Number
+    }
+  ]).then(function (answer) {
+    // Retrieve the item requested and its quantity instock
+    itemReq = answer.item_id;
+    console.log(itemReq);
+    stockReq = answer.stock_quantity;
+    console.log(stockReq);
   }
-  ])
 }
-// TO DO:Query DB to make sure the user input is less than the stock quanity
