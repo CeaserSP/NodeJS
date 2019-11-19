@@ -53,15 +53,21 @@ function userPurchase() {
       filter: Number
     }
   ]).then(function (answer) {
-    // Retrieve the item requested and its quantity instock
-    itemReq = answer.item_id;
-    // console.log(itemReq);
-    stockReq = answer.stock_quantity;
-    // console.log(stockReq);
+    // Retrieve the item requested and its quantity instock?????????????
+    // itemReq and stockReq are returning the user inputs
+    var itemReq = answer.item_id;
+    console.log(itemReq);
+    var stockReq = answer.stock_quantity;
+    console.log(stockReq);
 
-    // connection.query("SELECT * FROM products WHERE ?", { item_id: itemReq }, function (err, res) {
-    //   if (err) throw err;
-
-    // })
+    connection.query("SELECT * FROM products WHERE ?", { item_id: itemReq }, function (err, res) {
+      if (err) throw err;
+      // Check stock_quanity vs stockReq to see if it can be fulfilled
+      if(stockReq <= res[0].stock_quantity){
+        return true;
+      } else{
+        console.log('Your order cannot be fulfilled at this time. Current stock of item '+ itemReq + " is "+ res[0].stock_quantity)
+      }
+    })
   })
 }
