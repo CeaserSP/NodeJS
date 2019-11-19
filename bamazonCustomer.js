@@ -63,10 +63,25 @@ function userPurchase() {
     connection.query("SELECT * FROM products WHERE ?", { item_id: itemReq }, function (err, res) {
       if (err) throw err;
       // Check stock_quanity vs stockReq to see if it can be fulfilled
-      if(stockReq <= res[0].stock_quantity){
-        return true;
-      } else{
-        console.log('Your order cannot be fulfilled at this time. Current stock of item '+ itemReq + " is "+ res[0].stock_quantity)
+      if (stockReq <= res[0].stock_quantity) {
+        console.log('Your item is in stock and is ready to order.');
+        // Update stock quanity. Get price and total order price.
+        connection.query("UPDATE products SET ? WHERE ?",
+          [
+            {
+              stock_quantity: stock_quantity - stockReq
+            },
+            {
+              item_id: itemReq
+            }
+          ],
+        function (err) {
+            if (err) throw err;
+            console.log(stock_quantity);
+          }
+        );
+      } else {
+        console.log('Your order cannot be fulfilled at this time. Current stock of item ' + itemReq + " is " + res[0].stock_quantity)
       }
     })
   })
