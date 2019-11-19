@@ -1,4 +1,5 @@
 var mysql = require("mysql");
+var inquirer = require("inquirer");
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -38,6 +39,6 @@ function userPurchase(){
       validate: validate,
       filter: Number
   }
-])
+]).then(function(answer){}
 }
 // TO DO:Query DB to make sure the user input is less than the stock quanity
