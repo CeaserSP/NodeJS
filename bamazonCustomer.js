@@ -23,3 +23,20 @@ function queryAllProducts() {
     console.log("-----------------------------------");
   });
 }
+// Set up user inputs to ask for item_id and stock_quantity
+function userPurchase(){
+  inquirer.prompt([{
+    name: "item_id",
+    type:"input",
+    message:"Enter item_id please.",
+    validate: validate,
+    filter: Number
+  },{
+      name: "stock_quantity",
+      type:"input",
+      message:"How many would you like?",
+      validate: validate,
+      filter: Number
+  }
+])
+}
