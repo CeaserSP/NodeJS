@@ -21,7 +21,7 @@ function queryAllProducts() {
     for (var i = 0; i < res.length; i++) {
       console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].department_name + " | " + res[i].price);
     }
-    console.log("-----------------------------------");
+    console.log("-----------------------------------------------------------------------------------------------");
     userPurchase();
   });
 };
@@ -77,12 +77,15 @@ function userPurchase() {
           ],
         function (err) {
             if (err) throw err;
-            console.log(res[0].stock_quantity);
+            // console.log('itemReq: '+ itemReq +'|' + 'item_id: ' +res[0].item_id +'|'+ 'stockReq: '+ stockReq +'|'+ 'stock_quantity: '+ res[0].stock_quantity);
             // Get price and total order price.
+            console.log('Your order summery. Total: '+res[0].price * stockReq + '|' + 'For ' + stockReq+' '+res[0].price+' '+ res[0].product_name+'.' );
           }
         );
       } else {
-        console.log('Your order cannot be fulfilled at this time. Current stock of item ' + itemReq + " is " + res[0].stock_quantity)
+        console.log('Your order cannot be fulfilled at this time. Current stock of item ' + itemReq + " is " + res[0].stock_quantity);
+        console.log('-----------------------------------------------------------------------------------------------')
+        queryAllProducts();
       }
     })
   })
